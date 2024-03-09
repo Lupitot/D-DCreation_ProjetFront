@@ -1,1 +1,16 @@
-<p>form-perso works!</p>
+<div *ngIf="raceVisible">
+  <h2>Races</h2>
+  <races (selectItem)="onRaceSelected($event)"> </races>
+  <button class="btnRaceToClasses" (click)="toggleVisibility()">next</button>
+</div>
+
+<div *ngIf="classeVisible">
+  <h2>Classe</h2>
+  <classes
+    class="classesComponent"
+    (selectItem)="onClasseSelected($event)"
+  >
+  </classes>
+</div>
+<p>{{ perso.classe }}</p>
+<p>{{ perso.race }}</p>

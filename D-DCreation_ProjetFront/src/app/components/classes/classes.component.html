@@ -1,0 +1,10 @@
+<div class="contentBtnClasses">
+  <button
+    [ngClass]="{ selected: item.name === selectedClasse }"
+    (click)="choiceClasse($event)"
+    *ngFor="let item of resultClasse"
+  >
+    {{ item.name }}
+  </button>
+</div>
+

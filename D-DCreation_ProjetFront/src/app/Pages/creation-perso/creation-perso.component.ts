@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { FormPersoComponent } from '../../components/form-perso/form-perso.component';
 
 @Component({
-  selector: 'app-creation-perso',
+  selector: 'creation-perso',
   standalone: true,
-  imports: [],
+  imports: [ FormPersoComponent ],
   templateUrl: './creation-perso.component.html',
   styleUrl: './creation-perso.component.scss'
 })
