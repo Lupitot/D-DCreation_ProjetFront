@@ -1,4 +1,7 @@
 .draggable-item {
+
+
+
   cursor: move;
     display: block;
     width: 3rem;
@@ -7,6 +10,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: 3rem;
 
 }
 

@@ -31,7 +31,9 @@
   ></pts-stat>
 </div>
 
-
+<button (click)="choiceStat($event)" [ngClass]="{ selected: item.name === selectedStat }">
+  valider
+</button>
  
 <h2>
   {{ totalPoints }}/27

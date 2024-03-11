@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import {PtsStatComponent} from '../pts-stat/pts-stat.component';
 import {BtnRandomStatComponent} from '../btn-random-stat/btn-random-stat.component';
+import { EventEmitter } from '@angular/core';
 
 
 @Component({
@@ -12,6 +13,9 @@ import {BtnRandomStatComponent} from '../btn-random-stat/btn-random-stat.compone
 })
 export class CaracteristiqueComponent {
 
+  selectedStat : string = '';
+
+  @Output() selectItem = new EventEmitter<string>();
 
   totalPoints = 12;
 
@@ -23,5 +27,13 @@ export class CaracteristiqueComponent {
     this.totalPoints = points;
   }
 
+  choiceStat(stat: any) {
+    if (this.totalPoints === 0) return;
+    this.selectItem.emit(stat);
+    this.selectedStat= stat.innerText;
+  }
 
+  // if (!historique?.target?.innerText) return;
+  // this.selectItem.emit(historique.target.innerText);
+  // this.selectedHistorique = historique.target.innerText;
 }

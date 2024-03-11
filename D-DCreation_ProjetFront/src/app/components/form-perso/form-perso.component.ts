@@ -32,11 +32,11 @@ export class FormPersoComponent {
   };
 
 
-  raceVisible = false;
+  raceVisible = true;
   classeVisible = false;
   historiqueVisible = false;
   statVisible = false;
-  statRandomVisible = true;
+  statRandomVisible = false;
 
   onClasseSelected(classe: string) {
     console.log(classe);
@@ -50,6 +50,11 @@ export class FormPersoComponent {
   onHistoriqueSelected(historique: string) {
     console.log(historique);
     this.perso.historique = historique;
+  }
+
+  onStatSelected(stat: string) {
+    console.log(stat);
+    this.perso.stat = stat;
   }
 
   toggleVisibilityRaceClasse() {
