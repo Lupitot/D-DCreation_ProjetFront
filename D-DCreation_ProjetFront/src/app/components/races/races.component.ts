@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RecupRaceService } from '../../services/recup-race.service';
 import { NgFor, NgIf } from '@angular/common';
-import { IRaces } from '../../interfaces/iraces';
+import { IRaces, IAsi } from '../../interfaces/iraces';
+
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -13,9 +14,12 @@ import { CommonModule } from '@angular/common';
 })
 export class RacesComponent {
   resultRace: IRaces[] = [];
+  resultAsi: IAsi[] = [];
   selectedRace: string = '';
 
   @Input() race: string[] = [];
+
+  @Input() asi: string[] = [];
 
   @Output() selectItem = new EventEmitter<string>();
 

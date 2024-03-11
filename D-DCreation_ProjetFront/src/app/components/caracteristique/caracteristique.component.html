@@ -1,0 +1,38 @@
+<div class="contentSelectoStat">
+  <pts-stat
+    [statName]="'Force'"
+    [pointDispo]="totalPoints"
+    (pointDispoChange)="updateTotalPoints($event)"
+  ></pts-stat>
+  <pts-stat
+    [statName]="'Dexterité'"
+    [pointDispo]="totalPoints"
+    (pointDispoChange)="updateTotalPoints($event)"
+  ></pts-stat>
+  <pts-stat
+    [statName]="'Constitution'"
+    [pointDispo]="totalPoints"
+    (pointDispoChange)="updateTotalPoints($event)"
+  ></pts-stat>
+  <pts-stat
+    [statName]="'Intelligence'"
+    [pointDispo]="totalPoints"
+    (pointDispoChange)="updateTotalPoints($event)"
+  ></pts-stat>
+  <pts-stat
+    [statName]="'Sagesse'"
+    [pointDispo]="totalPoints"
+    (pointDispoChange)="updateTotalPoints($event)"
+  ></pts-stat>
+  <pts-stat
+    [statName]="'Charisme'"
+    [pointDispo]="totalPoints"
+    (pointDispoChange)="updateTotalPoints($event)"
+  ></pts-stat>
+</div>
+
+
+ 
+<h2>
+  {{ totalPoints }}/27
+</h2>

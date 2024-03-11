@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { IRaces } from '../interfaces/iraces';
+import { IRaces, IAsi } from '../interfaces/iraces';
 
 @Injectable({
   providedIn: 'root',
@@ -18,4 +18,5 @@ export class RecupRaceService {
       .get(this.apiRoutes.races)
       .pipe(map((data: any) => data.results as IRaces[]));
   }
+
 }

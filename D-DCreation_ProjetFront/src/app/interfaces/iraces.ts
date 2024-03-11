@@ -1,13 +1,13 @@
-interface IAsi {
+export interface IAsi {
     attributes: string[],
     value: number
 }
 
-interface ISpeed {
+export interface ISpeed {
     walk: number
 }
 
-interface ISubraces {
+export interface ISubraces {
     name: string,
     slug: string,
     desc: string,

@@ -1,16 +1,35 @@
 <div *ngIf="raceVisible">
   <h2>Races</h2>
-  <races (selectItem)="onRaceSelected($event)"> </races>
-  <button class="btnRaceToClasses" (click)="toggleVisibility()">next</button>
+  <races (selectItem)="onRaceSelected($event)"></races>
+  <button class="btnRaceToClasses" (click)="toggleVisibilityRaceClasse()">next</button>
 </div>
 
 <div *ngIf="classeVisible">
   <h2>Classe</h2>
-  <classes
-    class="classesComponent"
-    (selectItem)="onClasseSelected($event)"
-  >
-  </classes>
+  <classes (selectItem)="onClasseSelected($event)"></classes>
+  <button class="btnClasseToHistorique" (click)="toggleVisibilityClasseHistorique()">next</button>
 </div>
-<p>{{ perso.classe }}</p>
+
+<div *ngIf="historiqueVisible">
+  <h2>Historique</h2>
+  <historique (selectItem)="onHistoriqueSelected($event)"></historique>
+  <button class="btnHistoriqueStat" (click)="toggleVisibilityHistoriqueStat()">next</button>
+</div>
+
+<div *ngIf="statVisible">
+  <h2> Statistique</h2>
+  <caracteristique></caracteristique>
+  <button class="btnStatRandom" (click)="toggleVisibilityStatStatRandom()">Random stat</button>
+</div>
+
+<div *ngIf="statRandomVisible">
+  <h2>Statistique Random</h2>
+  <caracteristique-random></caracteristique-random>
+</div>
+
+
 <p>{{ perso.race }}</p>
+<p>{{ perso.classe }}</p>
+<p>{{ perso.historique }}</p>
+<p>{{ perso.stat }}</p>
+

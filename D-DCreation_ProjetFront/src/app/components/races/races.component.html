@@ -1,9 +1,14 @@
 <div class="contentBtnRaces">
+  <div *ngFor="let item of resultRace">
     <button
       [ngClass]="{ selected: item.name === selectedRace }"
       (click)="choiceRace($event)"
-      *ngFor="let item of resultRace"
     >
       {{ item.name }}
     </button>
+    <p *ngFor="let asi of item.asi">
+      {{ asi.attributes[0] }}
+      {{ asi.value }}
+    </p>
   </div>
+</div>

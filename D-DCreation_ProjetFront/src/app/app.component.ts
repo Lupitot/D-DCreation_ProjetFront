@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CreationPersoComponent} from './Pages/creation-perso/creation-perso.component';
+import { DragDropModule} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CreationPersoComponent],
+  imports: [RouterOutlet, CreationPersoComponent, DragDropModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

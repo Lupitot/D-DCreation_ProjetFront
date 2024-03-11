@@ -1,0 +1,8 @@
+<div class="contentBtnHistorique">
+  <button
+    [ngClass]="{ selected: item.name === selectedHistorique }"
+    (click)="choiceHistorique($event)"
+    *ngFor="let item of resultHistorique"
+  >
+    {{ item.name }}
+  </button>
