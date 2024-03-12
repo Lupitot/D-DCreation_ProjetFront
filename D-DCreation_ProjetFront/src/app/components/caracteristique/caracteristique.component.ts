@@ -1,25 +1,32 @@
-import { Component, Output } from '@angular/core';
-import {PtsStatComponent} from '../pts-stat/pts-stat.component';
-import {BtnRandomStatComponent} from '../btn-random-stat/btn-random-stat.component';
+import { Component, Input, Output } from '@angular/core';
+import { PtsStatComponent } from '../pts-stat/pts-stat.component';
+import { BtnRandomStatComponent } from '../btn-random-stat/btn-random-stat.component';
 import { EventEmitter } from '@angular/core';
-
+import { AttributionCarcteristiqueService } from '../../services/attribution-carcteristique.service';
 
 @Component({
   selector: 'caracteristique',
   standalone: true,
   imports: [PtsStatComponent, BtnRandomStatComponent],
   templateUrl: './caracteristique.component.html',
-  styleUrl: './caracteristique.component.scss'
+  styleUrl: './caracteristique.component.scss',
 })
 export class CaracteristiqueComponent {
+  selectedStat?: number = 0;
 
-  selectedStat : string = '';
+  @Input() stat: number[] = [];
 
-  @Output() selectItem = new EventEmitter<string>();
+  @Output() validateStats = new EventEmitter<number>();
+
+  statFinal?: number;
+
+
 
   totalPoints = 12;
 
-  constructor() {}
+  constructor(
+    private attributionCarcteristiqueService: AttributionCarcteristiqueService
+  ) {}
 
   ngOnInit() {}
 
@@ -27,13 +34,21 @@ export class CaracteristiqueComponent {
     this.totalPoints = points;
   }
 
-  choiceStat(stat: any) {
-    if (this.totalPoints === 0) return;
-    this.selectItem.emit(stat);
-    this.selectedStat= stat.innerText;
+  updateStatValue(statFinal: number) {
+    console.log('statFinal', statFinal);
+    this.statFinal = statFinal;
+    this.onStatSelected(statFinal);
   }
 
-  // if (!historique?.target?.innerText) return;
-  // this.selectItem.emit(historique.target.innerText);
-  // this.selectedHistorique = historique.target.innerText;
+  onStatSelected(stat: number) {
+    this.attributionCarcteristiqueService.addSelectedStat(stat);
+  }
+
+  validate() {
+    console.log('validate');
+    console.log(this.attributionCarcteristiqueService.getSelectedStatFinal());
+    this.validateStats.emit(
+      this.attributionCarcteristiqueService.getSelectedStatFinal() || undefined
+    );
+  }
 }

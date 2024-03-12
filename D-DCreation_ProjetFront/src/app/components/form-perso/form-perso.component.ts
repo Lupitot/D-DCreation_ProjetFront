@@ -4,9 +4,10 @@ import { RacesComponent } from '../races/races.component';
 import { HistoriqueComponent } from '../historique/historique.component';
 import { CaracteristiqueComponent } from '../caracteristique/caracteristique.component';
 import { CaracteristiqueRandomComponent } from '../caracteristique-random/caracteristique-random.component';
-import {BtnRandomStatComponent } from '../btn-random-stat/btn-random-stat.component';
+import { BtnRandomStatComponent } from '../btn-random-stat/btn-random-stat.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgIf } from '@angular/common';
+import { AttributionCarcteristiqueService } from '../../services/attribution-carcteristique.service';
 
 @Component({
   selector: 'form-perso',
@@ -28,9 +29,12 @@ export class FormPersoComponent {
     classe: '',
     race: '',
     historique: '',
-    stat: '',
+    stat: 0,
   };
 
+  constructor(
+    private attributionCarcteristiqueService: AttributionCarcteristiqueService
+  ) {}
 
   raceVisible = true;
   classeVisible = false;
@@ -52,8 +56,11 @@ export class FormPersoComponent {
     this.perso.historique = historique;
   }
 
-  onStatSelected(stat: string) {
-    console.log(stat);
+  onStatSelected(stat: number) {
+    console.log('stat de form', stat);
+     this.attributionCarcteristiqueService.getSelectedStatFinal();
+     console.log('get', this.attributionCarcteristiqueService.getSelectedStatFinal());
+    // this.attributionCarcteristiqueService.setStatFinal(stat);
     this.perso.stat = stat;
   }
 
@@ -76,7 +83,4 @@ export class FormPersoComponent {
     this.statVisible = false;
     this.statRandomVisible = true;
   }
-
-
-
 }

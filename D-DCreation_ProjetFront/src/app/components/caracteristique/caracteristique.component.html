@@ -3,35 +3,41 @@
     [statName]="'Force'"
     [pointDispo]="totalPoints"
     (pointDispoChange)="updateTotalPoints($event)"
+    (statValueChange)="updateStatValue($event)"
   ></pts-stat>
   <pts-stat
     [statName]="'Dexterité'"
     [pointDispo]="totalPoints"
     (pointDispoChange)="updateTotalPoints($event)"
+    (statValueChange)="updateStatValue($event)"
   ></pts-stat>
   <pts-stat
     [statName]="'Constitution'"
     [pointDispo]="totalPoints"
     (pointDispoChange)="updateTotalPoints($event)"
+    (statValueChange)="updateStatValue($event)"
   ></pts-stat>
   <pts-stat
     [statName]="'Intelligence'"
     [pointDispo]="totalPoints"
     (pointDispoChange)="updateTotalPoints($event)"
+    (statValueChange)="updateStatValue($event)"
   ></pts-stat>
   <pts-stat
     [statName]="'Sagesse'"
     [pointDispo]="totalPoints"
     (pointDispoChange)="updateTotalPoints($event)"
+    (statValueChange)="updateStatValue($event)"
   ></pts-stat>
   <pts-stat
     [statName]="'Charisme'"
     [pointDispo]="totalPoints"
     (pointDispoChange)="updateTotalPoints($event)"
+    (statValueChange)="updateStatValue($event)"
   ></pts-stat>
 </div>
 
-<button (click)="choiceStat($event)" [ngClass]="{ selected: item.name === selectedStat }">
+<button (click)="validate()" >
   valider
 </button>
  
