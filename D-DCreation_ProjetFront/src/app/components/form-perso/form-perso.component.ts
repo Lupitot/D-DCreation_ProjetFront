@@ -29,12 +29,9 @@ export class FormPersoComponent {
     classe: '',
     race: '',
     historique: '',
-    stat: 0,
+    stat: [0, 0, 0, 0, 0, 0],
   };
 
-  constructor(
-    private attributionCarcteristiqueService: AttributionCarcteristiqueService
-  ) {}
 
   raceVisible = true;
   classeVisible = false;
@@ -56,11 +53,8 @@ export class FormPersoComponent {
     this.perso.historique = historique;
   }
 
-  onStatSelected(stat: number) {
+  onStatSelected(stat: number[]) {
     console.log('stat de form', stat);
-     this.attributionCarcteristiqueService.getSelectedStatFinal();
-     console.log('get', this.attributionCarcteristiqueService.getSelectedStatFinal());
-    // this.attributionCarcteristiqueService.setStatFinal(stat);
     this.perso.stat = stat;
   }
 

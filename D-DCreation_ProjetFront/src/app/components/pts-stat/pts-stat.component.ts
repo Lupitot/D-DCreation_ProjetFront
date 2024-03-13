@@ -26,7 +26,7 @@ export class PtsStatComponent {
   constructor() {}
 
   ngOnInit() {}
-
+  // typeStat: string
   addPoints() {
     if (this.pointDispo >= 0 && this.pointDispo < 27) {
       if (this.statValue < 15) {
@@ -38,6 +38,7 @@ export class PtsStatComponent {
           this.pointDispo++;
         }
         this.pointDispoChange.emit(this.pointDispo);
+
         this.statValueChange.emit(this.statValue);
         if (this.statValue % 2 === 0) {
           this.additionnalPoints++;

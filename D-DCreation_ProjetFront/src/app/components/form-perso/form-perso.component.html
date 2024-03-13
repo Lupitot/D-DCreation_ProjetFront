@@ -18,7 +18,7 @@
 
 <div *ngIf="statVisible">
   <h2> Statistique</h2>
-  <caracteristique (validateStats)="onStatSelected($event)"></caracteristique>
+  <caracteristique (statSelected)="onStatSelected($event)"></caracteristique>
   <button class="btnStatRandom" (click)="toggleVisibilityStatStatRandom()">Random stat</button>
 </div>
 

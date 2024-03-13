@@ -16,17 +16,11 @@ export class CaracteristiqueComponent {
 
   @Input() stat: number[] = [];
 
-  @Output() validateStats = new EventEmitter<number>();
+  @Output() statSelected = new EventEmitter<number[]>();
 
-  statFinal?: number;
-
-
+  statFinal: number[] = [0, 0, 0, 0, 0, 0];
 
   totalPoints = 12;
-
-  constructor(
-    private attributionCarcteristiqueService: AttributionCarcteristiqueService
-  ) {}
 
   ngOnInit() {}
 
@@ -34,21 +28,28 @@ export class CaracteristiqueComponent {
     this.totalPoints = points;
   }
 
-  updateStatValue(statFinal: number) {
-    console.log('statFinal', statFinal);
-    this.statFinal = statFinal;
-    this.onStatSelected(statFinal);
+  updateStatValue(statFinalSelect: number, typeStat: string) {
+    console.log('statFinal', statFinalSelect);
+    if (typeStat == 'force') {
+      this.statFinal[0] = statFinalSelect;
+    } else if (typeStat == 'dexterite') {
+      this.statFinal[1] = statFinalSelect;
+    } else if (typeStat == 'constitution') {
+      this.statFinal[2] = statFinalSelect;
+    } else if (typeStat == 'intelligence') {
+      this.statFinal[3] = statFinalSelect;
+    } else if (typeStat == 'sagesse') {
+      this.statFinal[4] = statFinalSelect;
+    } else if (typeStat == 'charisme') {
+      this.statFinal[5] = statFinalSelect;
+    }
+    console.log('statFinal', this.statFinal);
   }
 
-  onStatSelected(stat: number) {
-    this.attributionCarcteristiqueService.addSelectedStat(stat);
-  }
+
 
   validate() {
     console.log('validate');
-    console.log(this.attributionCarcteristiqueService.getSelectedStatFinal());
-    this.validateStats.emit(
-      this.attributionCarcteristiqueService.getSelectedStatFinal() || undefined
-    );
+    this.statSelected.emit(this.statFinal);
   }
 }
