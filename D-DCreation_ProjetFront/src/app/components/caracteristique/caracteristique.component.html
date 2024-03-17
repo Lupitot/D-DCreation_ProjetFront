@@ -1,46 +1,67 @@
-<div class="contentSelectoStat">
-  <pts-stat
-    [statName]="'Force'"
-    [pointDispo]="totalPoints"
-    (pointDispoChange)="updateTotalPoints($event)"
-    (statValueChange)="updateStatValue($event, 'force')"
-  ></pts-stat>
-  <pts-stat
-    [statName]="'Dexterité'"
-    [pointDispo]="totalPoints"
-    (pointDispoChange)="updateTotalPoints($event)"
-    (statValueChange)="updateStatValue($event, 'dexterite')"
-  ></pts-stat>
-  <pts-stat
-    [statName]="'Constitution'"
-    [pointDispo]="totalPoints"
-    (pointDispoChange)="updateTotalPoints($event)"
-    (statValueChange)="updateStatValue($event, 'constitution')"
-  ></pts-stat>
-  <pts-stat
-    [statName]="'Intelligence'"
-    [pointDispo]="totalPoints"
-    (pointDispoChange)="updateTotalPoints($event)"
-    (statValueChange)="updateStatValue($event, 'intelligence')"
-  ></pts-stat>
-  <pts-stat
-    [statName]="'Sagesse'"
-    [pointDispo]="totalPoints"
-    (pointDispoChange)="updateTotalPoints($event)"
-    (statValueChange)="updateStatValue($event, 'sagesse')"
-  ></pts-stat>
-  <pts-stat
-    [statName]="'Charisme'"
-    [pointDispo]="totalPoints"
-    (pointDispoChange)="updateTotalPoints($event)"
-    (statValueChange)="updateStatValue($event, 'charisme')"
-  ></pts-stat>
-</div>
+<section class="contentSelect">
+  <div class="contentSelectoStat">
+    <span>
+      <pts-stat
+        class="StatistiqueSelector"
+        [statName]="'Force'"
+        [pointDispo]="totalPoints"
+        (pointDispoChange)="updateTotalPoints($event)"
+        (statValueChange)="updateStatValue($event, 'force')"
+        (statFinalAdditionnalPoints)="updateStatBonusValue($event, 'force')"
+      ></pts-stat>
+      <pts-stat
+        class="StatistiqueSelector"
+        [statName]="'Dexterité'"
+        [pointDispo]="totalPoints"
+        (pointDispoChange)="updateTotalPoints($event)"
+        (statValueChange)="updateStatValue($event, 'dexterite')"
+        (statFinalAdditionnalPoints)="updateStatBonusValue($event, 'dexterite')"
+      ></pts-stat>
+      <pts-stat
+        class="StatistiqueSelector"
+        [statName]="'Constitution'"
+        [pointDispo]="totalPoints"
+        (pointDispoChange)="updateTotalPoints($event)"
+        (statValueChange)="updateStatValue($event, 'constitution')"
+        (statFinalAdditionnalPoints)="
+          updateStatBonusValue($event, 'constitution')
+        "
+      ></pts-stat>
+    </span>
 
-<button (click)="validate()" >
-  valider
-</button>
- 
-<h2>
-  {{ totalPoints }}/27
-</h2>
+    <span>
+      <pts-stat
+        class="StatistiqueSelector"
+        [statName]="'Intelligence'"
+        [pointDispo]="totalPoints"
+        (pointDispoChange)="updateTotalPoints($event)"
+        (statValueChange)="updateStatValue($event, 'intelligence')"
+        (statFinalAdditionnalPoints)="
+          updateStatBonusValue($event, 'intelligence')
+        "
+      ></pts-stat>
+      <pts-stat
+        class="StatistiqueSelector"
+        [statName]="'Sagesse'"
+        [pointDispo]="totalPoints"
+        (pointDispoChange)="updateTotalPoints($event)"
+        (statValueChange)="updateStatValue($event, 'sagesse')"
+        (statFinalAdditionnalPoints)="updateStatBonusValue($event, 'sagesse')"
+      ></pts-stat>
+      <pts-stat
+        class="StatistiqueSelector"
+        [statName]="'Charisme'"
+        [pointDispo]="totalPoints"
+        (pointDispoChange)="updateTotalPoints($event)"
+        (statValueChange)="updateStatValue($event, 'charisme')"
+        (statFinalAdditionnalPoints)="updateStatBonusValue($event, 'charisme')"
+      ></pts-stat>
+    </span>
+  </div>
+
+  <span class="contentBottom">
+    <button class="valideStat" (click)="validate()">Valider</button>
+
+    <h2 class="totalPoint">{{ totalPoints }}/27</h2>
+  </span>
+</section>

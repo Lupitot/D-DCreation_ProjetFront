@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 export class ClassesComponent {
   resultClasse: Iclasses[] = [];
   selectedClasse: string = '';
+  hoveredClasse: any = null;
 
   @Input() classe: string[] = [];
 
@@ -34,9 +35,9 @@ export class ClassesComponent {
       },
     });
   }
-  choiceClasse(classe: any) {
+  choiceClasse(classe: any, name: string) {
     if (!classe?.target?.innerText) return;
-    this.selectItem.emit(classe.target.innerText);
-    this.selectedClasse = classe.target.innerText;
+    this.selectItem.emit(name);
+    this.selectedClasse = name;
   }
 }

@@ -16,6 +16,8 @@ export class PtsStatComponent {
 
   @Output() statValueChange = new EventEmitter<number>();
 
+  @Output() statFinalAdditionnalPoints = new EventEmitter<number>();
+
 
   statValue = 10;
 
@@ -42,6 +44,7 @@ export class PtsStatComponent {
         this.statValueChange.emit(this.statValue);
         if (this.statValue % 2 === 0) {
           this.additionnalPoints++;
+          this.statFinalAdditionnalPoints.emit(this.additionnalPoints);
         }
       }
     }
@@ -59,8 +62,10 @@ export class PtsStatComponent {
         }
         this.pointDispoChange.emit(this.pointDispo);
         this.statValueChange.emit(this.statValue);
+
         if (this.statValue % 2 === 1) {
           this.additionnalPoints--;
+          this.statFinalAdditionnalPoints.emit(this.additionnalPoints);
         }
       }
     }

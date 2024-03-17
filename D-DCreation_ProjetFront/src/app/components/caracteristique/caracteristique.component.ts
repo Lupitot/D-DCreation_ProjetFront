@@ -2,7 +2,6 @@ import { Component, Input, Output } from '@angular/core';
 import { PtsStatComponent } from '../pts-stat/pts-stat.component';
 import { BtnRandomStatComponent } from '../btn-random-stat/btn-random-stat.component';
 import { EventEmitter } from '@angular/core';
-import { AttributionCarcteristiqueService } from '../../services/attribution-carcteristique.service';
 
 @Component({
   selector: 'caracteristique',
@@ -12,15 +11,24 @@ import { AttributionCarcteristiqueService } from '../../services/attribution-car
   styleUrl: './caracteristique.component.scss',
 })
 export class CaracteristiqueComponent {
-  selectedStat?: number = 0;
+  selectedStat?: number = 10;
 
   @Input() stat: number[] = [];
 
+  @Input() statBonus: number[] = [];
+
   @Output() statSelected = new EventEmitter<number[]>();
 
-  statFinal: number[] = [0, 0, 0, 0, 0, 0];
+  @Output() statBonusAdd = new EventEmitter<number[]>();
+
+  @Output() finish = new EventEmitter<boolean>();
+
+  statFinal: number[] = [10, 10, 10, 10, 10, 10];
+
+  statBonusFinal: number[] = [];
 
   totalPoints = 12;
+
 
   ngOnInit() {}
 
@@ -46,10 +54,31 @@ export class CaracteristiqueComponent {
     console.log('statFinal', this.statFinal);
   }
 
+  updateStatBonusValue(statBonusFinalSelect: number, typeStat: string) {
+    console.log('statBonusFinal', statBonusFinalSelect);
+    if (typeStat == 'force') {
+      this.statBonusFinal[0] = statBonusFinalSelect;
+    } else if (typeStat == 'dexterite') {
+      this.statBonusFinal[1] = statBonusFinalSelect;
+    } else if (typeStat == 'constitution') {
+      this.statBonusFinal[2] = statBonusFinalSelect;
+    } else if (typeStat == 'intelligence') {
+      this.statBonusFinal[3] = statBonusFinalSelect;
+    } else if (typeStat == 'sagesse') {
+      this.statBonusFinal[4] = statBonusFinalSelect;
+    } else if (typeStat == 'charisme') {
+      this.statBonusFinal[5] = statBonusFinalSelect;
+    }
+    console.log('statBonusFinal', this.statBonusFinal);
+  }
+
 
 
   validate() {
     console.log('validate');
     this.statSelected.emit(this.statFinal);
+    this.statBonusAdd.emit(this.statBonusFinal);
+    console.log("finish", this.finish);
+    this.finish.emit(true);
   }
 }

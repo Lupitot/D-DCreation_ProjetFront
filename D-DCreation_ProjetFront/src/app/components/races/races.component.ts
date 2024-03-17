@@ -16,6 +16,7 @@ export class RacesComponent {
   resultRace: IRaces[] = [];
   resultAsi: IAsi[] = [];
   selectedRace: string = '';
+  hoveredRace: any = null;
 
   @Input() race: string[] = [];
 
@@ -40,9 +41,10 @@ export class RacesComponent {
     });
   }
 
-  choiceRace(race: any) {
+  choiceRace(race: any, name : string) {
     if (!race?.target?.innerText) return;
-    this.selectItem.emit(race.target.innerText);
-    this.selectedRace = race.target.innerText;
+    this.selectedRace = name;
+    this.selectItem.emit(name);
+    
   }
 }

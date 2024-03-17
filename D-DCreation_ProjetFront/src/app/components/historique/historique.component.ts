@@ -15,6 +15,7 @@ import { NgFor } from '@angular/common';
 export class HistoriqueComponent {
   resultHistorique: IHistorique[] = [];
   selectedHistorique: string = '';
+  hoveredHistorique: any = null;
 
   @Input() historique: string[] = [];
 
@@ -37,10 +38,10 @@ export class HistoriqueComponent {
     });
   }
 
-  choiceHistorique(historique: any) {
+  choiceHistorique(historique: any, name: string) {
     if (!historique?.target?.innerText) return;
-    this.selectItem.emit(historique.target.innerText);
-    this.selectedHistorique = historique.target.innerText;
+    this.selectItem.emit(name);
+    this.selectedHistorique = name;
   }
 
 }

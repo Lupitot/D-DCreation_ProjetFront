@@ -1,12 +1,8 @@
 import { Component, Input, Output, ViewChild } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
-  CdkDropList,
-} from '@angular/cdk/drag-drop';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'data-stat-drop',
@@ -16,7 +12,34 @@ import {
   styleUrl: './data-stat-drop.component.scss',
 })
 export class DataStatDropComponent {
-  @Input() listeStat: number[] = [];
+  @Input() set listeStat(value: number[]) {
+    this._listeStat = value;
+    this.listeStatInitiale = [...value];
+  }
+
+  @Input() set listeStatBonus(value: number[]) {
+    this._listeStatBonus = value;
+    this.listeStatBonusInitiale = [...value];
+  }
+
+  @Output() statSelectedRandom = new EventEmitter<number[]>();
+
+  @Output() statBonusSelectedRandom = new EventEmitter<number[]>();
+
+  listeStatFinal: number[] = [10, 10, 10, 10, 10, 10];
+
+  get listeStat(): number[] {
+    return this._listeStat;
+  }
+
+  get listeStatBonus(): number[] {
+    return this._listeStatBonus;
+  }
+
+  private _listeStatBonus: number[] = [];
+  private _listeStat: number[] = [];
+  public listeStatInitiale: number[] = [];
+  public listeStatBonusInitiale: number[] = [];
 
   force: number | null = null;
   dexterite: number | null = null;
@@ -27,20 +50,15 @@ export class DataStatDropComponent {
 
   listeStatMemoire: number[] = [];
 
+  onIgnite() {
+    this.validate();
+  }
+
   drop(event: CdkDragDrop<number[]>, targetContainer: string) {
-    console.log('listeStat début de drop', this.listeStat);
-    console.log(
-      this.force,
-      this.dexterite,
-      this.constitution,
-      this.intelligence,
-      this.sagesse,
-      this.charisme
-    );
-    
-    
+    console.log('listeStatBonus', this.listeStatBonus);
 
     const item = event.previousContainer.data[event.previousIndex];
+    const bonusItem = this.listeStatBonus[event.previousIndex];
     if (event.container.data.length === 0) {
       event.container.data = [];
       console.log('item', item);
@@ -50,47 +68,59 @@ export class DataStatDropComponent {
       const index = this.listeStat.findIndex((stat) => stat === item);
       if (index > -1) {
         this.listeStatMemoire.push(item);
-        console.log('item2', item);
         this.listeStat.splice(index, 1);
+        this.listeStatBonus.splice(index, 1);
       }
-
-      // Vérifier si le conteneur cible est vide
-
       // Insérer l'élément dans le conteneur cible à la position spécifiée
       event.container.data.splice(event.currentIndex, 0, item);
 
-      
       // Mettre à jour la statistique cible
-      this.updateTargetStat(item, targetContainer);
-      
+      this.updateTargetStat(item, bonusItem, targetContainer);
+      if (this.listeStat.length === 0) {
+        this.validate();
+      }
     } else {
-      console.log("eventContainerElse",event.container.data.length);
       console.log(
         "Le conteneur cible n'est pas vide. Impossible d'ajouter un nouvel élément."
       );
     }
-    
   }
 
-  private updateTargetStat(stat: number, targetContainer: string) {
+  private updateTargetStat(
+    stat: number,
+    bonus: number,
+    targetContainer: string
+  ) {
     switch (targetContainer) {
       case 'force':
         this.force = stat;
+        this.listeStatFinal[0] = stat;
+        this.listeStatBonusInitiale[0] = bonus;
         break;
       case 'dexterite':
         this.dexterite = stat;
+        this.listeStatFinal[1] = stat;
+        this.listeStatBonusInitiale[1] = bonus;
         break;
       case 'constitution':
         this.constitution = stat;
+        this.listeStatFinal[2] = stat;
+        this.listeStatBonusInitiale[2] = bonus;
         break;
       case 'intelligence':
         this.intelligence = stat;
+        this.listeStatFinal[3] = stat;
+        this.listeStatBonusInitiale[3] = bonus;
         break;
       case 'sagesse':
         this.sagesse = stat;
+        this.listeStatFinal[4] = stat;
+        this.listeStatBonusInitiale[4] = bonus;
         break;
       case 'charisme':
         this.charisme = stat;
+        this.listeStatFinal[5] = stat;
+        this.listeStatBonusInitiale[5] = bonus;
         break;
       default:
         break;
@@ -105,12 +135,16 @@ export class DataStatDropComponent {
     this.intelligence = null;
     this.sagesse = null;
     this.charisme = null;
-
+    this.listeStatFinal = [0, 0, 0, 0, 0, 0];
     // Réinitialiser la liste d'origine avec les valeurs initiales
-    this.listeStat = [...this.listeStatMemoire];
+    this.listeStat = [...this.listeStatInitiale];
     this.listeStatMemoire = [];
   }
+
+  validate() {
+    console.log('validate');
+    console.log('listeBonus', this.listeStatBonus);
+    this.statSelectedRandom.emit(this.listeStatFinal);
+    this.statBonusSelectedRandom.emit(this.listeStatBonusInitiale);
+  }
 }
-// etat : lorsque je deplace un element de la liste de base vers une stat c'est bon
-// puis lorsque je reset les stat pour les replacer les nombre mis dans les stats sont bien remis dans la liste de base mais lorsqu'on enleve un nombre de la liste de base pour le réassigner a une stat il se place dans la stat mais il y a toujours autant de nombre dans la liste de base
-// si on met un nombre dans une stat deja avec un nombre le nombre devient vide
